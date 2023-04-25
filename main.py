@@ -79,6 +79,8 @@ def admin_only(func):
     def wrapper_function(*args, **kwargs):
         if current_user is None:
             abort(403)
+        elif not current_user.is_authenticated:
+            abort(403)
         elif current_user.id != 1:
             abort(403)
         else:
